@@ -90,6 +90,19 @@ prm-user-area md-fab-toolbar .md-fab-action-item md-input-container md-select:ho
     background-color: #004065;
 }
 
+.__xs md-autocomplete-wrap {
+    /* Limit the width the placeholder text can be so that it doesn't overlap with the icons */
+    max-width: calc(100% - 100px); /* 100px = combined set width of filter icon and magnifying glass icon */
+}
+
+.__xs md-autocomplete-wrap button {
+  margin: auto !important; /* overrides Primo styling that previously set 100px margin-right on "x" icon (handled differently by above override)  */
+}
+
+#searchBar {
+    text-overflow: ellipsis;
+}
+
 /* sign in
 .bar.alert-bar {
 	background-color: #E9D5A3;
