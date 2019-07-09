@@ -31,15 +31,23 @@
      */
 
     /* Insert found a problem link */
-    app.controller('foundProblem', function () {
+    app.controller('FullViewServiceContainerAfterController', [function () {
         var vm = this;
-        var currentURL = encodeURIComponent(window.location.href);
-        var foundProblemForm = 'https://library.gwu.edu/found-problem'
-        var vm.foundProblemCombinedURL = foundProblemForm + '?url=' + currentURL;
-    });
+        
+        function getPermalink() {
+            var currentURL = encodeURIComponent(window.location.href),
+                foundProblemForm = 'https://library.gwu.edu/found-problem';
+            foundProblemForm += ('?url=' + currentURL); 
+            //return 'https://library.gwu.edu/found-problem';
+            return foundProblemForm;
+        }
+        vm.getPermalink = getPermalink;
+        
+    }]);
     app.component('prmFullViewServiceContainerAfter', {
-        controller: 'foundProblem',
-        template: '<a class="layout-align-left-left layout-column" id="found-problem" href="{{ $ctrl.foundProblemCombinedURL }}" target="_blank">Found a Problem?</a>'
+        bindings: { parentCtrl: '<' },
+        controller: 'FullViewServiceContainerAfterController',
+        template: '<a class="layout-align-left-left layout-column" id="found-problem" href="{{ $ctrl.getPermalink() }}" target="_blank">Found a Problem?</a>'
     });
 
     /*
