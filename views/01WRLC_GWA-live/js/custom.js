@@ -38,7 +38,7 @@
         var vm.foundProblemCombinedURL = foundProblemForm + '?url=' + currentURL;
     });
     app.component('prmFullViewServiceContainerAfter', {
-        contoller: 'foundProblem',
+        controller: 'foundProblem',
         template: '<a class="layout-align-left-left layout-column" id="found-problem" href="{{ $ctrl.foundProblemCombinedURL }}" target="_blank">Found a Problem?</a>'
     });
 
