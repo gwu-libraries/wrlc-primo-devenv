@@ -178,3 +178,8 @@ alma-howovp button span:hover {
 .facet-title > span:last-of-type {
   padding-left: 5px;
 }
+
+/* hide GW Request links for items at other libraries */
+prm-alma-other-members prm-request-services {
+    display: none;
+}
