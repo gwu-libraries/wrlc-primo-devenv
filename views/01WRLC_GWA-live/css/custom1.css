@@ -183,3 +183,8 @@ alma-howovp button span:hover {
 prm-alma-other-members prm-request-services {
     display: none;
 }
+
+/* hide ILL link when CLS link not present */
+.hide-ill {
+    display: none;
+}

@@ -81,3 +81,36 @@
         link_text: 'Sign into Interlibrary Loan'
     });
 })();
+
+/*
+ * Hide ILL link if CLS link is not present
+ */
+
+(function () {
+    "use strict";
+    'use strict';
+
+    var myVar;
+
+    function hideIll() {
+        myVar = setTimeout(findIll, 5000);  // wait 5 seconds before running function
+    }
+
+    function findIll() {
+        // Find CLS link
+        var clsElement = document.querySelector("prm-full-view-service-container span[ng-if='service[\\'service-type\\'] !== \\'OvL\\'']");
+        // Find ILL link
+        var illElement = document.querySelector("prm-full-view-service-container span[ng-if='service[\\'service-type\\'] === \\'OvL\\'']");
+        // Check if CLS link is missing but ILL link is present
+        if(!clsElement && illElement){
+            // Find the ILL link's parent <button> tag
+            var illButton = illElement.closest("button");
+            // Hide the ILL <button>
+            illButton.className += " hide-ill";
+        }
+    }
+
+    hideIll();
+
+
+})();
