@@ -102,7 +102,7 @@
         // Find ILL link
         var illElement = document.querySelector("prm-full-view-service-container span[ng-if='service[\\'service-type\\'] === \\'OvL\\'']");
         // Check if CLS link is missing but ILL link is present
-        if(!clsElement && illElement){
+        if(clsElement == null && illElement){
             // Find the ILL link's parent <button> tag
             var illButton = illElement.closest("button");
             // Hide the ILL <button>
