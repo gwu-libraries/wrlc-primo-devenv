@@ -80,23 +80,9 @@
         signon_url: 'https://proxygw.wrlc.org/login?url=https://gwu.illiad.oclc.org/illiad/illiad.dll',
         link_text: 'Sign into Interlibrary Loan'
     });
-})();
 
-/*
- * Hide ILL link if CLS link is not present
- */
-
-(function () {
-    "use strict";
-    'use strict';
-
-    var myVar;
-
-    function hideIll() {
-        myVar = setTimeout(findIll, 5000);  // wait 5 seconds before running function
-    }
-
-    function findIll() {
+    /* Hide ILL link if CLS link is not present */
+    app.controller('ServiceHeaderAfterController', [function () {
         // Find CLS link
         var clsElement = document.querySelector("prm-full-view-service-container span[ng-if='service[\\'service-type\\'] !== \\'OvL\\'']");
         // Find ILL link
@@ -108,9 +94,11 @@
             // Hide the ILL <button>
             illButton.className += " hide-ill";
         }
-    }
+    }]);
 
-    hideIll();
-
-
+    app.component('prmServiceHeaderAfter', {
+        bindings: { parentCtrl: '<' },
+        controller: 'ServiceHeaderAfterController',
+        template: '<hide-cls></hide-cls>'
+    })
 })();
