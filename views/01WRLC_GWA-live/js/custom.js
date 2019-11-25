@@ -83,17 +83,27 @@
 
     /* Hide ILL link if CLS link is not present */
     app.controller('ServiceHeaderAfterController', [function () {
-        // Find CLS link
-        var clsElement = document.querySelector("prm-full-view-service-container span[ng-if='service[\\'service-type\\'] !== \\'OvL\\'']");
-        // Find ILL link
-        var illElement = document.querySelector("prm-full-view-service-container span[ng-if='service[\\'service-type\\'] === \\'OvL\\'']");
-        // Check if CLS link is missing but ILL link is present
-        if(clsElement == null && illElement){
-            // Find the ILL link's parent <button> tag
-            var illButton = illElement.closest("button");
-            // Hide the ILL <button>
-            illButton.className += " hide-ill";
-        }
+        var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function (mutation) {
+                // Find CLS link
+                var clsElement = document.querySelector("prm-full-view-service-container span[ng-if='service[\\'service-type\\'] !== \\'OvL\\'']");
+                // Find ILL link
+                var illElement = document.querySelector("prm-full-view-service-container span[ng-if='service[\\'service-type\\'] === \\'OvL\\'']");
+                // Check if CLS link is missing but ILL link is present
+                if(clsElement == null && illElement){
+                    // Find the ILL link's parent <button> tag
+                    var illButton = illElement.closest("button");
+                    // Hide the ILL <button>
+                    illButton.className += " hide-ill";
+                }
+            })
+        });
+        var observerConfig = {
+            childList: true,
+            subtree: true
+        };
+        var targetNode = document.body;
+        observer.observe(targetNode, observerConfig);
     }]);
 
     app.component('prmServiceHeaderAfter', {
